@@ -1,6 +1,15 @@
 [![NVIDIA Source Code License](https://img.shields.io/badge/license-NSCL-blue.svg)](https://github.com/NVlabs/SegFormer/blob/master/LICENSE)
 ![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)
 
+# Yera changes:
+Added support for RARP50 dataset.
+To run training:
+1) Add RARP50 data to /data/rarp50/rgb/{training/validation} and .../segmentation/{training/validation} folders.
+2) Run the bash command
+```
+tools/dist_train.sh local_configs/segformer/B2/segformer.b2.512x512.rarp50.40k.py 1
+```
+
 # SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers
 
 <!-- ![image](resources/image.png) -->
