@@ -5,7 +5,8 @@
 Added support for RARP50 dataset.
 To run training:
 1) Add RARP50 data to /data/rarp50/rgb/{training/validation} and .../segmentation/{training/validation} folders.
-2) Run the bash command
+2) Download pretrained `segformer.b2.512x512.ade.160k.pth` file to `pretrained/` folder 
+3) Run the bash command
 ```
 tools/dist_train.sh local_configs/segformer/B2/segformer.b2.512x512.rarp50.40k.py 1
 ```
