@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'RARP50Dataset'
-data_root = 'data/rarp50'
+data_root = '/media/deep/Transcend/sar-rarp-dataset/traindata'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 crop_size = (512, 512)
@@ -37,18 +37,18 @@ data = dict(
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='rgb/training',
-        ann_dir='segmentation/training',
+        img_dir=['video_'+str(i)+'.zip/rgb' for i in range(1, 41)],
+        ann_dir=['video_'+str(i)+'.zip/segmentation' for i in range(1, 41)],
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='rgb/validation',
-        ann_dir='segmentation/validation',
+        img_dir='video_val_1.zip/rgb',
+        ann_dir='video_val_1.zip/segmentation',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='rgb/validation',
-        ann_dir='segmentation/validation',
+        img_dir=['video_test_'+str(i)+'.zip/rgb' for i in range(1, 4)],
+        ann_dir=['video_test_'+str(i)+'.zip/segmentation' for i in range(1, 4)],
         pipeline=test_pipeline))

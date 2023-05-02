@@ -1,6 +1,7 @@
 from .builder import DATASETS
 from .custom import CustomDataset
-
+import os.path as osp
+import mmcv
 
 @DATASETS.register_module()
 class RARP50Dataset(CustomDataset):
@@ -24,3 +25,17 @@ class RARP50Dataset(CustomDataset):
             seg_map_suffix='.png',
             reduce_zero_label=True,
             **kwargs)
+
+    def get_gt_seg_maps(self, efficient_test=True):
+        """Get ground truth segmentation maps for evaluation."""
+        gt_seg_maps = []
+        for img_info in self.img_infos:
+            seg_map = osp.join(self.ann_dir, img_info['ann']['seg_map'])
+            if efficient_test:
+                gt_seg_map = seg_map
+            else:
+                gt_seg_map = mmcv.imread(
+                    seg_map, flag='unchanged', backend='pillow')
+                gt_seg_map = gt_seg_map[:,:,0]
+            gt_seg_maps.append(gt_seg_map)
+        return gt_seg_maps
