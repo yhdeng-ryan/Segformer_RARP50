@@ -110,9 +110,9 @@ data
 # custom
 *.pkl
 *.pkl.json
-*.log.json
-work_dirs/
-work_dirs
+# *.log.json
+# work_dirs/
+# work_dirs
 pretrained
 pretrained/
 # Pytorch
