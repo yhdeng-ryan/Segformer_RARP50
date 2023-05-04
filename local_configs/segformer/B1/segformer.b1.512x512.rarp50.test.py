@@ -10,13 +10,13 @@ norm_cfg = dict(type='SyncBN', requires_grad=True)
 find_unused_parameters = True
 model = dict(
     type='EncoderDecoder',
-    pretrained='pretrained/segformer_mit-b0_512x512_160k_ade20k_20210726_101530-8ffa8fda.pth',
+    pretrained='pretrained/segformer_mit-b1_512x512_160k_ade20k_20210726_112106-d70e859d.pth',
     backbone=dict(
-        type='mit_b0',
+        type='mit_b1',
         style='pytorch'),
     decode_head=dict(
         type='SegFormerHead',
-        in_channels=[32, 64, 160, 256],
+        in_channels=[64, 128, 320, 512],
         in_index=[0, 1, 2, 3],
         feature_strides=[4, 8, 16, 32],
         channels=128,
@@ -39,7 +39,7 @@ optimizer = dict(_delete_=True, type='AdamW', lr=0.00006, betas=(0.9, 0.999), we
 
 lr_config = dict(_delete_=True, policy='poly',
                  warmup='linear',
-                 warmup_iters=750,
+                 warmup_iters=1500,
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 

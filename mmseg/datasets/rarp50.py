@@ -13,17 +13,15 @@ class RARP50Dataset(CustomDataset):
     '.png'.
     """
     CLASSES = (
-        'tool_clasper', 'tool_wrist', 'tool_shaft', 'suturing_needle', 'thread', 'suction_tool', 'needle_holder', 'clamps', 'catheter')
+        'anatomy', 'tool_clasper', 'tool_wrist', 'tool_shaft', 'suturing_needle', 'thread', 'suction_tool', 'needle_holder', 'clamps', 'catheter')
 
-    PALETTE = [[120, 120, 120], [180, 120, 120], [6, 230, 230], [80, 50, 50],
-               [4, 200, 3], [120, 120, 80], [140, 140, 140], [204, 5, 255],
-               [230, 230, 230]]
+    PALETTE = [[127, 127, 127], [214, 39, 40], [ 31, 119, 180], [255, 127, 14], [ 44, 160, 44],
+               [148, 103, 189], [140, 86, 75], [227, 119, 194], [188, 189, 34], [ 23, 190, 207]]
 
     def __init__(self, **kwargs):
         super(RARP50Dataset, self).__init__(
             img_suffix='.png',
             seg_map_suffix='.png',
-            reduce_zero_label=True,
             **kwargs)
 
     def get_gt_seg_maps(self, efficient_test=True):
