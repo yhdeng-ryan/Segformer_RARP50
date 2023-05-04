@@ -2,8 +2,9 @@ norm_cfg = dict(type='SyncBN', requires_grad=True)
 find_unused_parameters = True
 model = dict(
     type='EncoderDecoder',
-    pretrained='pretrained/segformer.b2.512x512.ade.160k.pth',
-    backbone=dict(type='mit_b2', style='pytorch'),
+    pretrained=
+    'pretrained/segformer_mit-b1_512x512_160k_ade20k_20210726_112106-d70e859d.pth',
+    backbone=dict(type='mit_b1', style='pytorch'),
     decode_head=dict(
         type='SegFormerHead',
         in_channels=[64, 128, 320, 512],
@@ -11,10 +12,10 @@ model = dict(
         feature_strides=[4, 8, 16, 32],
         channels=128,
         dropout_ratio=0.1,
-        num_classes=9,
+        num_classes=10,
         norm_cfg=dict(type='SyncBN', requires_grad=True),
         align_corners=False,
-        decoder_params=dict(embed_dim=768),
+        decoder_params=dict(embed_dim=256),
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
     train_cfg=dict(),
@@ -22,21 +23,19 @@ model = dict(
 dataset_type = 'RARP50Dataset'
 data_root = '/media/deep/Transcend/sar-rarp-dataset/traindata'
 img_norm_cfg = dict(
-    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+    mean=[60.99, 26.03, 26.96], std=[43.87, 30.58, 33.15], to_rgb=True)
 crop_size = (512, 512)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', reduce_zero_label=True),
+    dict(type='LoadAnnotations', reduce_zero_label=False),
     dict(type='Resize', img_scale=(1920, 1080), ratio_range=(0.5, 2.0)),
     dict(type='RandomCrop', crop_size=(512, 512), cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
-    dict(type='PhotoMetricDistortion'),
     dict(
         type='Normalize',
-        mean=[123.675, 116.28, 103.53],
-        std=[58.395, 57.12, 57.375],
+        mean=[60.99, 26.03, 26.96],
+        std=[43.87, 30.58, 33.15],
         to_rgb=True),
-    dict(type='Pad', size=(512, 512), pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_semantic_seg'])
 ]
@@ -48,11 +47,10 @@ test_pipeline = [
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
             dict(
                 type='Normalize',
-                mean=[123.675, 116.28, 103.53],
-                std=[58.395, 57.12, 57.375],
+                mean=[60.99, 26.03, 26.96],
+                std=[43.87, 30.58, 33.15],
                 to_rgb=True),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img'])
@@ -104,18 +102,16 @@ data = dict(
         ],
         pipeline=[
             dict(type='LoadImageFromFile'),
-            dict(type='LoadAnnotations', reduce_zero_label=True),
+            dict(type='LoadAnnotations', reduce_zero_label=False),
             dict(
                 type='Resize', img_scale=(1920, 1080), ratio_range=(0.5, 2.0)),
             dict(type='RandomCrop', crop_size=(512, 512), cat_max_ratio=0.75),
             dict(type='RandomFlip', prob=0.5),
-            dict(type='PhotoMetricDistortion'),
             dict(
                 type='Normalize',
-                mean=[123.675, 116.28, 103.53],
-                std=[58.395, 57.12, 57.375],
+                mean=[60.99, 26.03, 26.96],
+                std=[43.87, 30.58, 33.15],
                 to_rgb=True),
-            dict(type='Pad', size=(512, 512), pad_val=0, seg_pad_val=255),
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img', 'gt_semantic_seg'])
         ]),
@@ -132,11 +128,10 @@ data = dict(
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
                     dict(
                         type='Normalize',
-                        mean=[123.675, 116.28, 103.53],
-                        std=[58.395, 57.12, 57.375],
+                        mean=[60.99, 26.03, 26.96],
+                        std=[43.87, 30.58, 33.15],
                         to_rgb=True),
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
@@ -145,14 +140,8 @@ data = dict(
     test=dict(
         type='RARP50Dataset',
         data_root='/media/deep/Transcend/sar-rarp-dataset/traindata',
-        img_dir=[
-            'video_test_1.zip/rgb', 'video_test_2.zip/rgb',
-            'video_test_3.zip/rgb'
-        ],
-        ann_dir=[
-            'video_test_1.zip/segmentation', 'video_test_2.zip/segmentation',
-            'video_test_3.zip/segmentation'
-        ],
+        img_dir='video_test_1.zip/rgb',
+        ann_dir='video_test_1.zip/segmentation',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -161,11 +150,10 @@ data = dict(
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
                     dict(
                         type='Normalize',
-                        mean=[123.675, 116.28, 103.53],
-                        std=[58.395, 57.12, 57.375],
+                        mean=[60.99, 26.03, 26.96],
+                        std=[43.87, 30.58, 33.15],
                         to_rgb=True),
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
@@ -193,13 +181,13 @@ optimizer_config = dict()
 lr_config = dict(
     policy='poly',
     warmup='linear',
-    warmup_iters=750,
+    warmup_iters=1500,
     warmup_ratio=1e-06,
     power=1.0,
     min_lr=0.0,
     by_epoch=False)
-runner = dict(type='IterBasedRunner', max_iters=40000)
+runner = dict(type='IterBasedRunner', max_iters=80000)
 checkpoint_config = dict(by_epoch=False, interval=4000)
 evaluation = dict(interval=4000, metric='mIoU')
-work_dir = './work_dirs/segformer.b2.512x512.rarp50.40k'
+work_dir = './work_dirs/segformer.b1.512x512.rarp50.80k'
 gpu_ids = range(0, 1)
