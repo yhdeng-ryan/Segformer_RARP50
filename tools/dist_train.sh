@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONFIG=${1:-local_configs/segformer/B0/segformer.b0.512x512.rarp50.40k.py}
+CONFIG=${1:-local_configs/segformer/B0/segformer.b0.512x512.rarp50.test.py}
 GPUS=${2:-1}
 PORT=${PORT:-29500}
 
