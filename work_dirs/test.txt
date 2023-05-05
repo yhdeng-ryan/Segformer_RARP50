@@ -1,0 +1,85 @@
+(dl2023) deep@ku20:~/DL_project/Segformer_RARP50$ tools/dist_test_multi.sh 
+2023-05-05 15:47:17,901 - mmseg - INFO - Loaded 132 images
+Use load_from_local loader
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 132/132, 2.4 task/s, elapsed: 55s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++-----------------+-------+-------+
+| Class           | IoU   | Acc   |
++-----------------+-------+-------+
+| anatomy         | 89.46 | 95.25 |
+| tool_clasper    | 15.1  | 16.61 |
+| tool_wrist      | 14.96 | 18.04 |
+| tool_shaft      | 63.93 | 93.87 |
+| suturing_needle | 25.76 | 33.37 |
+| thread          | 0.23  | 0.23  |
+| suction_tool    | 0.0   | 0.0   |
+| needle_holder   | 0.0   | 0.0   |
+| clamps          | 0.0   | 0.0   |
+| catheter        | 25.98 | 29.16 |
++-----------------+-------+-------+
+Summary:
+
++--------+-------+-------+-------+
+| Scope  | mIoU  | mAcc  | aAcc  |
++--------+-------+-------+-------+
+| global | 23.54 | 28.65 | 88.18 |
++--------+-------+-------+-------+
+2023-05-05 15:48:22,747 - mmseg - INFO - Loaded 132 images
+Use load_from_local loader
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 132/132, 2.7 task/s, elapsed: 50s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++-----------------+-------+-------+
+| Class           | IoU   | Acc   |
++-----------------+-------+-------+
+| anatomy         | 93.49 | 98.52 |
+| tool_clasper    | 42.0  | 54.84 |
+| tool_wrist      | 38.0  | 43.53 |
+| tool_shaft      | 78.23 | 91.19 |
+| suturing_needle | 30.5  | 33.78 |
+| thread          | 3.0   | 3.14  |
+| suction_tool    | 0.0   | 0.0   |
+| needle_holder   | 36.56 | 39.88 |
+| clamps          | 0.04  | 0.04  |
+| catheter        | 12.17 | 12.21 |
++-----------------+-------+-------+
+Summary:
+
++--------+------+-------+-------+
+| Scope  | mIoU | mAcc  | aAcc  |
++--------+------+-------+-------+
+| global | 33.4 | 37.71 | 92.45 |
++--------+------+-------+-------+
+2023-05-05 15:49:21,359 - mmseg - INFO - Loaded 132 images
+Use load_from_local loader
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 132/132, 2.6 task/s, elapsed: 50s, ETA:     0s
+writing results to work_dirs/res.pkl
+per class results:
+
++-----------------+-------+-------+
+| Class           | IoU   | Acc   |
++-----------------+-------+-------+
+| anatomy         | 93.77 | 98.97 |
+| tool_clasper    | 39.98 | 48.6  |
+| tool_wrist      | 44.38 | 53.74 |
+| tool_shaft      | 82.45 | 89.7  |
+| suturing_needle | 36.21 | 44.67 |
+| thread          | 7.37  | 7.68  |
+| suction_tool    | 2.6   | 2.61  |
+| needle_holder   | 0.0   | 0.0   |
+| clamps          | 0.09  | 0.09  |
+| catheter        | 34.18 | 35.45 |
++-----------------+-------+-------+
+Summary:
+
++--------+------+-------+-------+
+| Scope  | mIoU | mAcc  | aAcc  |
++--------+------+-------+-------+
+| global | 34.1 | 38.15 | 93.06 |
++--------+------+-------+-------+
+2023-05-05 15:50:21,141 - mmseg - INFO - Loaded 132 images
+Use load_from_local loader
+[>>>>>>>>>>>>>>>                                   ] 41/132, 2.9 task/s, elapsed: 14s, ETA:    32s
