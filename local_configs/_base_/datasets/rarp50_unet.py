@@ -3,11 +3,11 @@ dataset_type = 'RARP50Dataset'
 data_root = '../data/rarp/'
 img_norm_cfg = dict(
     mean=[85.7148, 40.4981, 39.0133], std =  [51.8542, 39.9905,41.0522], to_rgb=True)
-crop_size = (512, 512)
+crop_size = (256, 256)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=False),
-    dict(type='Resize', img_scale=(1333, 750)),
+    dict(type='Resize', img_scale=(1920, 1080)),
     dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5, direction='horizontal'),
     # dict(type='PhotoMetricDistortion'),
@@ -20,12 +20,12 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1333, 750),
+        img_scale=(1920,1080),
         # img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75],
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            # dict(type='RandomFlip'),
+            dict(type='RandomFlip'),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
@@ -33,7 +33,7 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=4,
-    workers_per_gpu=16,
+    workers_per_gpu=4,
     train=dict(
         type=dataset_type,
         data_root=data_root,

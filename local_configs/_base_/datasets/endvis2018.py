@@ -1,8 +1,8 @@
 # dataset settings
-dataset_type = 'RARP50Dataset'
-data_root = '../data/rarp/'
+dataset_type = 'Endovis2018Dataset'
+data_root = '../data/rarp/trainingdata'
 img_norm_cfg = dict(
-    mean=[85.7148, 40.4981, 39.0133], std =  [51.8542, 39.9905,41.0522], to_rgb=True)
+    mean=[119.074,88.644,94.002], std =  [51.609,47.238,50.367], to_rgb=True)
 crop_size = (512, 512)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -37,18 +37,18 @@ data = dict(
     train=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='traindata/rgb/training',
-        ann_dir='traindata/segmentation/training',
+        img_dir='rgb/training',
+        ann_dir='segmentation/training',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='traindata/rgb/val_small',
-        ann_dir='traindata/segmentation/val_small',
+        img_dir='rgb/val',
+        ann_dir='segmentation/val',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='traindata/rgb/val_small',
-        ann_dir='traindata/segmentation/val_small',
+        img_dir='rgb/val',
+        ann_dir='segmentation/val',
         pipeline=test_pipeline))

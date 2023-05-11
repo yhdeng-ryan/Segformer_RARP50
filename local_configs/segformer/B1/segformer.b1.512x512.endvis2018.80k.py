@@ -1,8 +1,8 @@
 _base_ = [
     '../../_base_/models/segformer.py',
-    '../../_base_/datasets/rarp50.py',
+    '../../_base_/datasets/endvis2018.py',
     '../../_base_/default_runtime.py',
-    '../../_base_/schedules/schedule_160k_adamw.py'
+    '../../_base_/schedules/schedule_80k_adamw.py'
 ]
 
 # model settings
@@ -10,7 +10,7 @@ norm_cfg = dict(type='SyncBN', requires_grad=True)
 find_unused_parameters = True
 model = dict(
     type='EncoderDecoder',
-    pretrained='pretrained/mit_b1.pth', #'work_dirs/segformer.b1.512x512.endvis2018.80k/iter_48000.pth', #
+    pretrained='pretrained/mit_b1.pth',
     backbone=dict(
         type='mit_b1',
         style='pytorch'),
@@ -21,11 +21,11 @@ model = dict(
         feature_strides=[4, 8, 16, 32],
         channels=128,
         dropout_ratio=0.1,
-        num_classes=10,
+        num_classes=12,
         norm_cfg=norm_cfg,
         align_corners=False,
         decoder_params=dict(embed_dim=256),
-        loss_decode=dict(type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)), #use_sigmoid=False for CE #class_weight=[1.2536, 45.4545, 27.7778, 8.3333, 250, 100, 200, 500, 666.667, 555.555]
+        loss_decode=dict(type='DiceLoss', use_sigmoid=False, loss_weight=1.0)),
     # model training and testing settings
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
@@ -45,4 +45,4 @@ lr_config = dict(_delete_=True, policy='poly',
 
 
 # data = dict(samples_per_gpu=2)
-evaluation = dict(interval=4000, metric='mIoU')
+evaluation = dict(interval=1000, metric='mIoU')
