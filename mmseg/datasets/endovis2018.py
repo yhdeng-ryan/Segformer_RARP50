@@ -4,22 +4,22 @@ import os.path as osp
 import mmcv
 
 @DATASETS.register_module()
-class RARP50Dataset(CustomDataset):
-    """RARP50 dataset.
+class Endovis2018Dataset(CustomDataset):
+    """Endovis2018Dataset dataset.
 
     In segmentation map annotation for RARP50, 0 stands for background, which
-    is not included in 9 categories. ``reduce_zero_label`` is fixed to False.
+    is not included in 11 categories. ``reduce_zero_label`` is fixed to False.
     The ``img_suffix`` is fixed to '.png' and ``seg_map_suffix`` is fixed to
     '.png'.
     """
     CLASSES = (
-        'anatomy', 'tool_clasper', 'tool_wrist', 'tool_shaft', 'suturing_needle', 'thread', 'suction_tool', 'needle_holder', 'clamps', 'catheter')
+        'anatomy', 'instrument_shaft', 'instrument_clasper', 'instrument_wrist', 'kidney_parenchyma', 'covered_kidney', 'thread', 'clamps', 'suturing_needle', 'suction_instrument', 'small_intestine', 'ultrasound_probe')
 
-    PALETTE = [[127, 127, 127], [214, 39, 40], [ 31, 119, 180], [255, 127, 14], [ 44, 160, 44],
-               [148, 103, 189], [140, 86, 75], [227, 119, 194], [188, 189, 34], [ 23, 190, 207]]
+    PALETTE = [[0,0,0], [0,255,0], [ 0,255,255], [125,255,12], [ 255,55,0],
+               [24,55,125], [187,155,25], [0,255,125], [255,255,125], [ 123,15,175], [ 124,155,5], [ 12,255,141]]
 
     def __init__(self, **kwargs):
-        super(RARP50Dataset, self).__init__(
+        super(Endovis2018Dataset, self).__init__(
             img_suffix='.png',
             seg_map_suffix='.png',
             reduce_zero_label=False,
