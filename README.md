@@ -1,15 +1,21 @@
 [![NVIDIA Source Code License](https://img.shields.io/badge/license-NSCL-blue.svg)](https://github.com/NVlabs/SegFormer/blob/master/LICENSE)
 ![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)
 
-# Yera changes:
-Added support for RARP50 dataset.
-To run training:
-1) Add RARP50 data to /data/rarp50/rgb/{training/validation} and .../segmentation/{training/validation} folders.
-2) Download pretrained `segformer.b2.512x512.ade.160k.pth` file to `pretrained/` folder 
-3) Run the bash command
+# DL_Spring2023_Project [Group32]. [SAR_RARP50](https://www.synapse.org/#!Synapse:syn27618412/wiki/616881) Challenge:
+Data used in the project: 
+1) <b>SAR_RARP50:</b> Main data. 50 videos sequences of prostatectomy [obtained by post-participation in the challenge. To gain access to data need to email organizators and sign aggreement to be added to the challenge team on Synapse]
+2) <b>Endovis2018:</b> Data used for pre-training. [link to the data](https://endovissub2018-roboticscenesegmentation.grand-challenge.org/Downloads/)
+
+Added support for RARP50 and Endovis2018 datasets.
+To run training on RARP50:
+1) Add RARP50 data to `/data/rarp/rgb/{training/val}` and `/data/rarp/segmentation/{training/val}` folders.
+2) Download ImageNet1K pretrained Segformer-B1 weights `mit_b1.pth` file to `pretrained/` folder 
+3) Run the bash command. Argument for config py file can be changed depending on what training routine you are going to train.
 ```
-tools/dist_train.sh local_configs/segformer/B2/segformer.b2.512x512.rarp50.40k.py 1
+tools/dist_train.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
 ```
+
+
 
 # SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers
 
