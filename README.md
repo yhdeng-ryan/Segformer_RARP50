@@ -2,6 +2,13 @@
 ![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)
 
 # DL_Spring2023_Project [Group32]. [SAR_RARP50](https://www.synapse.org/#!Synapse:syn27618412/wiki/616881) Challenge:
+
+
+#### Inference visuals (GIF and Video files) for validation and test examples can be found [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143924&cid=FBAFB9D4AC1E09B9)
+#### Weights for RARP50 trained (+ pretrained) weights with descriptions [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143988&cid=FBAFB9D4AC1E09B9)
+
+##
+
 #### Data used in the project: 
 1) <b>SAR_RARP50:</b> Main data. 50 videos sequences of prostatectomy [obtained by post-participation in the challenge. To gain access to data need to email organizators and sign aggreement to be added to the challenge team on Synapse]
 2) <b>Endovis2018:</b> Data used for pre-training. [link to the data](https://endovissub2018-roboticscenesegmentation.grand-challenge.org/Downloads/)
@@ -30,8 +37,6 @@ For evaluation of the multiple `*.pth` checkpoints (please choose appropriate co
 ```
 tools/dist_test_multi.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
 ```
-#### Inference visuals (GIF and Video files) for validation and test examples can be found [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143924&cid=FBAFB9D4AC1E09B9)
-#### Weights for RARP50 trained (+ pretrained) weights with descriptions [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143988&cid=FBAFB9D4AC1E09B9)
 
 #
 #
