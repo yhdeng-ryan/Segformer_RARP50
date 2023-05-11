@@ -6,11 +6,12 @@ Data used in the project:
 1) <b>SAR_RARP50:</b> Main data. 50 videos sequences of prostatectomy [obtained by post-participation in the challenge. To gain access to data need to email organizators and sign aggreement to be added to the challenge team on Synapse]
 2) <b>Endovis2018:</b> Data used for pre-training. [link to the data](https://endovissub2018-roboticscenesegmentation.grand-challenge.org/Downloads/)
 
-Added support for RARP50 and Endovis2018 datasets.
-To run training on RARP50:
-1) Add RARP50 data to `/data/rarp/rgb/{training/val}` and `/data/rarp/segmentation/{training/val}` folders.
-2) Download ImageNet1K pretrained Segformer-B1 weights `mit_b1.pth` file to `pretrained/` folder 
-3) Run the bash command. Argument for config py file can be changed depending on what training routine you are going to train.
+Added support for RARP50 and Endovis2018 datasets pre-training using Segformer-B1 and UNet-backbone_Deeplabv3 models.
+To run training for RARP50:
+1) Add the data to `/data/rarp/{rgb/segmentation}/{training/val}` folders.
+2) Download pretrained Segformer-B1 weights `*.pth` files to `pretrained/` folder.
+3) Update/Use config files in `/local_configs/segformer/B1/` folder.
+4) Run the bash command. Argument for config py file can be changed depending on what training routine you are going to train.
 ```
 tools/dist_train.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
 ```
