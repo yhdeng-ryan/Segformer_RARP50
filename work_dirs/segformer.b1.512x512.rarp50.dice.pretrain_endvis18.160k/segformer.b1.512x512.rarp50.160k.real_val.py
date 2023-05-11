@@ -15,8 +15,7 @@ model = dict(
         norm_cfg=dict(type='SyncBN', requires_grad=True),
         align_corners=False,
         decoder_params=dict(embed_dim=256),
-        loss_decode=dict(
-            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
+        loss_decode=dict(type='DiceLoss', use_sigmoid=False, loss_weight=1.0)),
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
 dataset_type = 'RARP50Dataset'
@@ -82,8 +81,8 @@ data = dict(
     val=dict(
         type='RARP50Dataset',
         data_root='../data/rarp/',
-        img_dir='traindata/rgb/val_small',
-        ann_dir='traindata/segmentation/val_small',
+        img_dir='traindata/rgb/val',
+        ann_dir='traindata/segmentation/val',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -104,8 +103,8 @@ data = dict(
     test=dict(
         type='RARP50Dataset',
         data_root='../data/rarp/',
-        img_dir='traindata/rgb/val_small',
-        ann_dir='traindata/segmentation/val_small',
+        img_dir='traindata/rgb/val',
+        ann_dir='traindata/segmentation/val',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(

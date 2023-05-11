@@ -11,20 +11,17 @@ model = dict(
         feature_strides=[4, 8, 16, 32],
         channels=128,
         dropout_ratio=0.1,
-        num_classes=10,
+        num_classes=12,
         norm_cfg=dict(type='SyncBN', requires_grad=True),
         align_corners=False,
         decoder_params=dict(embed_dim=256),
-        loss_decode=dict(
-            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
+        loss_decode=dict(type='DiceLoss', use_sigmoid=False, loss_weight=1.0)),
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
-dataset_type = 'RARP50Dataset'
-data_root = '../data/rarp/'
+dataset_type = 'Endovis2018Dataset'
+data_root = '../data/endovis2018/traindata'
 img_norm_cfg = dict(
-    mean=[85.7148, 40.4981, 39.0133],
-    std=[51.8542, 39.9905, 41.0522],
-    to_rgb=True)
+    mean=[119.074, 88.644, 94.002], std=[51.609, 47.238, 50.367], to_rgb=True)
 crop_size = (512, 512)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -34,8 +31,8 @@ train_pipeline = [
     dict(type='RandomFlip', prob=0.5, direction='horizontal'),
     dict(
         type='Normalize',
-        mean=[85.7148, 40.4981, 39.0133],
-        std=[51.8542, 39.9905, 41.0522],
+        mean=[119.074, 88.644, 94.002],
+        std=[51.609, 47.238, 50.367],
         to_rgb=True),
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_semantic_seg'])
@@ -50,8 +47,8 @@ test_pipeline = [
             dict(type='Resize', keep_ratio=True),
             dict(
                 type='Normalize',
-                mean=[85.7148, 40.4981, 39.0133],
-                std=[51.8542, 39.9905, 41.0522],
+                mean=[119.074, 88.644, 94.002],
+                std=[51.609, 47.238, 50.367],
                 to_rgb=True),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img'])
@@ -61,10 +58,10 @@ data = dict(
     samples_per_gpu=4,
     workers_per_gpu=16,
     train=dict(
-        type='RARP50Dataset',
-        data_root='../data/rarp/',
-        img_dir='traindata/rgb/training',
-        ann_dir='traindata/segmentation/training',
+        type='Endovis2018Dataset',
+        data_root='../data/endovis2018/traindata',
+        img_dir='rgb/training',
+        ann_dir='segmentation/training',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations', reduce_zero_label=False),
@@ -73,17 +70,17 @@ data = dict(
             dict(type='RandomFlip', prob=0.5, direction='horizontal'),
             dict(
                 type='Normalize',
-                mean=[85.7148, 40.4981, 39.0133],
-                std=[51.8542, 39.9905, 41.0522],
+                mean=[119.074, 88.644, 94.002],
+                std=[51.609, 47.238, 50.367],
                 to_rgb=True),
             dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img', 'gt_semantic_seg'])
         ]),
     val=dict(
-        type='RARP50Dataset',
-        data_root='../data/rarp/',
-        img_dir='traindata/rgb/val_small',
-        ann_dir='traindata/segmentation/val_small',
+        type='Endovis2018Dataset',
+        data_root='../data/endovis2018/traindata',
+        img_dir='rgb/val',
+        ann_dir='segmentation/val',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -94,18 +91,18 @@ data = dict(
                     dict(type='Resize', keep_ratio=True),
                     dict(
                         type='Normalize',
-                        mean=[85.7148, 40.4981, 39.0133],
-                        std=[51.8542, 39.9905, 41.0522],
+                        mean=[119.074, 88.644, 94.002],
+                        std=[51.609, 47.238, 50.367],
                         to_rgb=True),
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
                 ])
         ]),
     test=dict(
-        type='RARP50Dataset',
-        data_root='../data/rarp/',
-        img_dir='traindata/rgb/val_small',
-        ann_dir='traindata/segmentation/val_small',
+        type='Endovis2018Dataset',
+        data_root='../data/endovis2018/traindata',
+        img_dir='rgb/val',
+        ann_dir='segmentation/val',
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(
@@ -116,8 +113,8 @@ data = dict(
                     dict(type='Resize', keep_ratio=True),
                     dict(
                         type='Normalize',
-                        mean=[85.7148, 40.4981, 39.0133],
-                        std=[51.8542, 39.9905, 41.0522],
+                        mean=[119.074, 88.644, 94.002],
+                        std=[51.609, 47.238, 50.367],
                         to_rgb=True),
                     dict(type='ImageToTensor', keys=['img']),
                     dict(type='Collect', keys=['img'])
@@ -127,7 +124,7 @@ log_config = dict(
     interval=50, hooks=[dict(type='TextLoggerHook', by_epoch=False)])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = 'work_dirs/segformer.b1.512x512.endvis2018.80k/iter_44000.pth'
+load_from = None
 resume_from = None
 workflow = [('train', 1)]
 cudnn_benchmark = True
@@ -150,8 +147,8 @@ lr_config = dict(
     power=1.0,
     min_lr=0.0,
     by_epoch=False)
-runner = dict(type='IterBasedRunner', max_iters=160000)
+runner = dict(type='IterBasedRunner', max_iters=80000)
 checkpoint_config = dict(by_epoch=False, interval=4000)
-evaluation = dict(interval=4000, metric='mIoU')
-work_dir = './work_dirs/segformer.b1.512x512.rarp50.160k'
+evaluation = dict(interval=1000, metric='mIoU')
+work_dir = './work_dirs/segformer.b1.512x512.endvis2018.80k'
 gpu_ids = range(0, 1)

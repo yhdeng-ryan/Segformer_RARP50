@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'Endovis2018Dataset'
-data_root = '../data/rarp/trainingdata'
+data_root = '../data/endovis2018/traindata'
 img_norm_cfg = dict(
     mean=[119.074,88.644,94.002], std =  [51.609,47.238,50.367], to_rgb=True)
 crop_size = (512, 512)
