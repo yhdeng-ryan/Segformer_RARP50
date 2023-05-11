@@ -30,7 +30,7 @@ For evaluation of the multiple `*.pth` checkpoints (please choose appropriate co
 ```
 tools/dist_test_multi.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
 ```
-
+#### Inference visuals (GIF and Video files) for validation and test examples can be found [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143924&cid=FBAFB9D4AC1E09B9)
 
 
 
