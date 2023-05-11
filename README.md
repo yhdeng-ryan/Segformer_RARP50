@@ -16,6 +16,12 @@ To run training for RARP50:
 tools/dist_train.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
 ```
 
+Training was performed by the group members on: 
+1) Google Cloud Vertex AI platform with single V100 GPU card. Data was uploaded to Google Cloud Storage and mounted as `/data` dir to the Vertex AI VM machine using `gsfuse`.
+2) On local machine with single RTX3070 GPU card.
+3) Google ColabPro with A100 card.
+
+
 
 
 # SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers
