@@ -2,11 +2,11 @@
 ![Python 3.8](https://img.shields.io/badge/python-3.8-green.svg)
 
 # DL_Spring2023_Project [Group32]. [SAR_RARP50](https://www.synapse.org/#!Synapse:syn27618412/wiki/616881) Challenge:
-Data used in the project: 
+#### Data used in the project: 
 1) <b>SAR_RARP50:</b> Main data. 50 videos sequences of prostatectomy [obtained by post-participation in the challenge. To gain access to data need to email organizators and sign aggreement to be added to the challenge team on Synapse]
 2) <b>Endovis2018:</b> Data used for pre-training. [link to the data](https://endovissub2018-roboticscenesegmentation.grand-challenge.org/Downloads/)
 
-Added support for RARP50 and Endovis2018 datasets pre-training using Segformer-B1 and UNet-backbone_Deeplabv3 models.
+#### Added support for RARP50 and Endovis2018 datasets pre-training using Segformer-B1 and UNet-backbone_Deeplabv3 models.
 To run training for RARP50:
 1) Add the data to `/data/rarp/{rgb/segmentation}/{training/val}` folders.
 2) Download pretrained Segformer-B1 weights `*.pth` files to `pretrained/` folder.
@@ -16,10 +16,20 @@ To run training for RARP50:
 tools/dist_train.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
 ```
 
-Training was performed by the group members on: 
+#### Training was performed by the group members on: 
 1) Google Cloud Vertex AI platform with single V100 GPU card. Data was uploaded to Google Cloud Storage and mounted as `/data` dir to the Vertex AI VM machine using `gsfuse`.
 2) On local machine with single RTX3070 GPU card.
 3) Google ColabPro with A100 card.
+
+#### Evaluation on validation set:
+For evaluation of the single `*.pth` checkpoint (please choose appropriate config `*.py` file):
+```
+tools/dist_test.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
+```
+For evaluation of the multiple `*.pth` checkpoints (please choose appropriate config `*.py` file and edit checkpoints files in the script):
+```
+tools/dist_test_multi.sh local_configs/segformer/B1/segformer.b1.512x512.rarp50.160k.py
+```
 
 
 
