@@ -3,6 +3,7 @@
 
 # DL_Spring2023_Project [Group32]. [SAR_RARP50](https://www.synapse.org/#!Synapse:syn27618412/wiki/616881) Challenge:
 
+[![Watch the video](https://img.youtube.com/vi/buefW35r7Rw/default.jpg)](https://youtu.be/buefW35r7Rw)
 
 #### Inference visuals (GIF and Video files) for validation and test examples can be found [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143924&cid=FBAFB9D4AC1E09B9)
 #### Weights for RARP50 trained (+ pretrained) weights with descriptions [here](https://onedrive.live.com/?authkey=%21AOyWHoFRvWBZj%5F4&id=FBAFB9D4AC1E09B9%2143988&cid=FBAFB9D4AC1E09B9)
